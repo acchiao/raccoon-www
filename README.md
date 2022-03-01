@@ -1,5 +1,7 @@
 # nutshell
 
+[![Release](https://github.com/acchiao/nutshell/actions/workflows/release.yml/badge.svg)](https://github.com/acchiao/nutshell/actions/workflows/release.yml)
+
 Landing Page for raccoon.team
 
 ## Quickstart
