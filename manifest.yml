@@ -10,6 +10,11 @@ metadata:
     external-dns.alpha.kubernetes.io/ttl: 5m
     service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol: "true"
     service.beta.kubernetes.io/do-loadbalancer-name: raccoon
+    nginx.ingress.kubernetes.io/enable-modsecurity: "true"
+    nginx.ingress.kubernetes.io/enable-owasp-core-rules: "true"
+    nginx.ingress.kubernetes.io/modsecurity-transaction-id: "$request_id"
+    nginx.ingress.kubernetes.io/modsecurity-snippet: |
+      SecRuleEngine On
 spec:
   ingressClassName: nginx
   tls:
@@ -57,6 +62,6 @@ spec:
     spec:
       containers:
       - name: nutshell
-        image: ghcr.io/acchiao/nutshell:v0.0.2
+        image: ghcr.io/acchiao/nutshell:v0.0.3
         ports:
         - containerPort: 80
