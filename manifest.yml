@@ -2,8 +2,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nutshell
-  namespace: nutshell
+  name: raccoon-www
+  namespace: raccoon-www
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-production
     external-dns.alpha.kubernetes.io/hostname: acchiao.com
@@ -20,7 +20,7 @@ spec:
   tls:
   - hosts:
     - acchiao.com
-    secretName: nutshell-tls
+    secretName: raccoon-www-tls
   rules:
   - host: acchiao.com
     http:
@@ -29,39 +29,39 @@ spec:
         path: "/"
         backend:
           service:
-            name: nutshell
+            name: raccoon-www
             port:
               number: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nutshell
-  namespace: nutshell
+  name: raccoon-www
+  namespace: raccoon-www
 spec:
   ports:
   - port: 80
     targetPort: 80
   selector:
-    app: nutshell
+    app: raccoon-www
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nutshell
-  namespace: nutshell
+  name: raccoon-www
+  namespace: raccoon-www
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nutshell
+      app: raccoon-www
   template:
     metadata:
       labels:
-        app: nutshell
+        app: raccoon-www
     spec:
       containers:
-      - name: nutshell
-        image: ghcr.io/acchiao/nutshell:v0.0.3
+      - name: raccoon-www
+        image: ghcr.io/acchiao/raccoon-www:v0.0.3
         ports:
         - containerPort: 80
